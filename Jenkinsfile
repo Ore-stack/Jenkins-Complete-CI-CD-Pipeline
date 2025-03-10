@@ -36,7 +36,7 @@ pipeline {
             - cat
             tty: true
           - name: kubectl-helm-cli
-            image: kunchalavikram/kubectl_helm_cli:latest
+            image: biglanche/kubectl-helm-cli:latest
             command:
             - cat
             tty: true
@@ -71,7 +71,7 @@ pipeline {
       when { expression { true } }
       steps {
         container('git') {
-          git url: 'https://github.com/kunchalavikram1427/spring-petclinic.git',
+          git url: 'https://github.com/Ore-stack/spring-petclinic.git',
           branch: 'main'
         }
       }
@@ -260,13 +260,13 @@ pipeline {
   }
   post {
     failure {
-      mail to: 'vikram@gmail.com',
+      mail to: 'oreoluwaosinowo55@gmail.com',
       from: 'jenkinsadmin@gmail.com',
       subject: "Jenkins pipeline has failed for job ${env.JOB_NAME}",
       body: "Check build logs at ${env.BUILD_URL}"
     }
     success {
-      mail to: 'vikram@gmail.com',
+      mail to: 'oreoluwaosinowo55@gmail.com',
       from: 'jenkinsadmin@gmail.com',
       subject: "Jenkins pipeline for job ${env.JOB_NAME} is completed successfully",
       body: "Check build logs at ${env.BUILD_URL}"
@@ -277,7 +277,7 @@ pipeline {
 void sendStatus(String stage, String status) {
     container('curl') {
         withCredentials([string(credentialsId: 'TOKEN-CREDS-NAME', variable: 'TOKEN')]) {
-            sh "curl -u USER-NAME:$TOKEN -X POST 'https://api.github.com/repos/kunchalavikram1427/spring-petclinic/statuses/$SHA_ID' -H 'Accept: application/vnd.github.v3+json' -d '{\"state\": \"$status\",\"context\": \"$stage\", \"description\": \"Jenkins\", \"target_url\": \"$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/console\"}' "
+            sh "curl -u USER-NAME:$TOKEN -X POST 'https://api.github.com/repos/biglanche/spring-petclinic/statuses/$SHA_ID' -H 'Accept: application/vnd.github.v3+json' -d '{\"state\": \"$status\",\"context\": \"$stage\", \"description\": \"Jenkins\", \"target_url\": \"$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/console\"}' "
         }
     }
 }
