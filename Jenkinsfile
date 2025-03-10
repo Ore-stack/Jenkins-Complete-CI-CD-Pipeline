@@ -277,7 +277,7 @@ pipeline {
 void sendStatus(String stage, String status) {
     container('curl') {
         withCredentials([string(credentialsId: 'TOKEN-CREDS-NAME', variable: 'TOKEN')]) {
-            sh "curl -u USER-NAME:$TOKEN -X POST 'https://api.github.com/repos/biglanche/spring-petclinic/statuses/$SHA_ID' -H 'Accept: application/vnd.github.v3+json' -d '{\"state\": \"$status\",\"context\": \"$stage\", \"description\": \"Jenkins\", \"target_url\": \"$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/console\"}' "
+            sh "curl -u USER-NAME:$TOKEN -X POST 'https://api.github.com/repos/Ore-stack/spring-petclinic/statuses/$SHA_ID' -H 'Accept: application/vnd.github.v3+json' -d '{\"state\": \"$status\",\"context\": \"$stage\", \"description\": \"Jenkins\", \"target_url\": \"$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/console\"}' "
         }
     }
 }
