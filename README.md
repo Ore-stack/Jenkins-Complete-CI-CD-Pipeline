@@ -215,7 +215,7 @@ $action $head $base
 
 ```
 withCredentials([string(credentialsId: 'TOKEN', variable: 'TOKEN')]) {
-    sh "curl -u kunchalavikram1427:$TOKEN -X POST 'https://api.github.com/repos/kunchalavikram1427/spring-petclinic/statuses/$SHA_ID' -H 'Accept: application/vnd.github.v3+json' -d '{\"state\": \"success\",\"context\": \"Maven Build\", \"description\": \"Jenkins\", \"target_url\": \"$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/console\"}' "
+    sh "curl -u Ore-stack:$TOKEN -X POST 'https://api.github.com/repos/Ore-stack/spring-petclinic/statuses/$SHA_ID' -H 'Accept: application/vnd.github.v3+json' -d '{\"state\": \"success\",\"context\": \"Maven Build\", \"description\": \"Jenkins\", \"target_url\": \"$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/console\"}' "
 }
 ```
 In function form
@@ -223,7 +223,7 @@ In function form
 void sendStatus(String stage, String status) {
     container('curl') {
         withCredentials([string(credentialsId: 'TOKEN', variable: 'TOKEN')]) {
-            sh "curl -u kunchalavikram1427:$TOKEN -X POST 'https://api.github.com/repos/kunchalavikram1427/spring-petclinic/statuses/$SHA_ID' -H 'Accept: application/vnd.github.v3+json' -d '{\"state\": \"$status\",\"context\": \"$stage\", \"description\": \"Jenkins\", \"target_url\": \"$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/console\"}' "
+            sh "curl -u Ore-stack:$TOKEN -X POST 'https://api.github.com/repos/Ore-stack/spring-petclinic/statuses/$SHA_ID' -H 'Accept: application/vnd.github.v3+json' -d '{\"state\": \"$status\",\"context\": \"$stage\", \"description\": \"Jenkins\", \"target_url\": \"$JENKINS_URL/job/$JOB_NAME/$BUILD_NUMBER/console\"}' "
         }
     }
 }
@@ -247,7 +247,7 @@ https://plugins.jenkins.io/mailer/
 ```
 post {
     failure {
-        mail to: 'vikram@gmail.com',
+        mail to: 'oreoluwaosinowo55@gmail.com',
         from: 'jenkinsadmin@gmail.com',
         subject: "Jenkins pipeline has failed for job ${env.JOB_NAME}",
         body: "Check build logs at ${env.BUILD_URL}"
@@ -269,7 +269,7 @@ ENTRYPOINT ["java","-jar","/usr/bin/spring-petclinic.war","--server.port=8080"]
 ```
 
 ## Dockerfile to build custom image with helm and kubectl cli tools
-Image available in Dockerhub as: kunchalavikrambiglanche/kubectl-helm-cli:latest
+Image available in Dockerhub as: biglanche/kubectl-helm-cli:latest
 ```
 FROM alpine/helm
 RUN curl -LO https://dl.k8s.io/release/v1.25.0/bin/linux/amd64/kubectl \
