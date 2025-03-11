@@ -1,9 +1,5 @@
-# Jenkins End to End Pipeline
+# Jenkins End to End Pipeline with Kubernetes Pods as Build Agents
 
-## Youtube Video URL
-```
-https://youtu.be/l9mf8K3vBvQ
-```
 ## Install Jenkins
 ```
 helm repo add jenkins https://charts.jenkins.io
@@ -114,7 +110,7 @@ options {
 ```
 ### Git clone
 ```
-git url: 'https://github.com/kunchalavikram1427/spring-petclinic.git',
+git url: 'https://github.com/Ore-stack/spring-petclinic.git',
 branch: 'main'
 ```
 ### Maven Build
@@ -257,7 +253,7 @@ post {
         body: "Check build logs at ${env.BUILD_URL}"
     }
     success {
-        mail to: 'vikram@gmail.com',
+        mail to: 'oreoluwaosinowo55@gmail.com',
         from: 'jenkinsadmin@gmail.com',
         subject: "Jenkins pipeline for job ${env.JOB_NAME} is completed successfully",
         body: "Check build logs at ${env.BUILD_URL}"
@@ -273,7 +269,7 @@ ENTRYPOINT ["java","-jar","/usr/bin/spring-petclinic.war","--server.port=8080"]
 ```
 
 ## Dockerfile to build custom image with helm and kubectl cli tools
-Image available in Dockerhub as: kunchalavikram/kubectl_helm_cli:latest
+Image available in Dockerhub as: kunchalavikrambiglanche/kubectl-helm-cli:latest
 ```
 FROM alpine/helm
 RUN curl -LO https://dl.k8s.io/release/v1.25.0/bin/linux/amd64/kubectl \
@@ -300,7 +296,7 @@ spec:
     spec:
       containers:
       - name: petclinic
-        image: kunchalavikram/spring-petclinic:latest
+        image: biglanche/spring-petclinic:latest
         ports:
         - containerPort: 8080
 ---
